@@ -1,5 +1,6 @@
 package mk.ukim.finki.veblabs.web.controller;
 
+import mk.ukim.finki.veblabs.exception.NonExistentBalloonException;
 import mk.ukim.finki.veblabs.model.Balloon;
 import mk.ukim.finki.veblabs.service.BalloonService;
 import mk.ukim.finki.veblabs.service.ManufacturerService;
@@ -34,7 +35,7 @@ public class BalloonController {
     }
     @GetMapping("/edit-form/{id}")
     public String getEditBalloonPage(@PathVariable Long id, Model model) {
-        Balloon b = this.balloonService.findById(id).get();
+        Balloon b = this.balloonService.findById(id).orElseThrow(() -> new NonExistentBalloonException(id));
         model.addAttribute("balloon", b);
         model.addAttribute("manufacturers", manufacturerService.findAll());
         return "add-form";
