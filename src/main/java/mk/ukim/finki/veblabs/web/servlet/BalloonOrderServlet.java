@@ -1,6 +1,7 @@
 package mk.ukim.finki.veblabs.web.servlet;
 
 import mk.ukim.finki.veblabs.model.Order;
+import mk.ukim.finki.veblabs.service.OrderService;
 import mk.ukim.finki.veblabs.service.implementation.OrderServiceImplementation;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -15,10 +16,10 @@ import java.io.IOException;
 @WebServlet(name = "balloonOrderServlet", urlPatterns = "/balloonOrder")
 public class BalloonOrderServlet extends HttpServlet {
     private final SpringTemplateEngine springTemplateEngine;
-    private final OrderServiceImplementation orderServiceImplementation;
-    public BalloonOrderServlet(SpringTemplateEngine springTemplateEngine, OrderServiceImplementation orderServiceImplementation) {
+    private final OrderService orderService;
+    public BalloonOrderServlet(SpringTemplateEngine springTemplateEngine, OrderService orderService) {
         this.springTemplateEngine = springTemplateEngine;
-        this.orderServiceImplementation = orderServiceImplementation;
+        this.orderService = orderService;
     }
 
     @Override
@@ -37,9 +38,10 @@ public class BalloonOrderServlet extends HttpServlet {
         String size = (String) req.getSession().getAttribute("size");
         String clientAddress = req.getParameter("clientAddress");
         String clientName = req.getParameter("clientName");
-        Order order = orderServiceImplementation.placeOrder(color,clientName,clientAddress);
+        Order order = orderService.placeOrder(color,clientName,clientAddress);
         order.setBalloonSize(size);
         req.getSession().setAttribute("order",order);
+        orderService.addOrder(order);
         resp.sendRedirect("/confirmationInfo");
     }
 }

@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:td="http://www.thymeleaf.org"
+      lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>All orders</title>
+  <style type="text/css">
+    body {
+      width: 800px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>All Orders</h1>
+</header>
+<main>
+  <table>
+    <thead>
+    <tr>
+      <th>Color</th>
+      <th>Size</th>
+      <th>Client Name</th>
+      <th>Client Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="o : ${orders}">
+      <td th:text="${o.getBalloonSize()}"></td>
+      <td th:text="${o.getBalloonColor()}"></td>
+      <td th:text="${o.getClientName()}"></td>
+      <td th:text="${o.getClientAddress()}"></td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>
