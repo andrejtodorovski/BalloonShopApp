@@ -1,4 +1,4 @@
-package mk.ukim.finki.veblabs.repository;
+package mk.ukim.finki.veblabs.repository.impl;
 
 import mk.ukim.finki.veblabs.model.Manufacturer;
 import org.springframework.stereotype.Repository;

@@ -3,8 +3,8 @@ package mk.ukim.finki.veblabs.service.implementation;
 import mk.ukim.finki.veblabs.exception.NonExistentManufacturerException;
 import mk.ukim.finki.veblabs.model.Balloon;
 import mk.ukim.finki.veblabs.model.Manufacturer;
-import mk.ukim.finki.veblabs.repository.BalloonRepository;
-import mk.ukim.finki.veblabs.repository.ManufacturerRepository;
+import mk.ukim.finki.veblabs.repository.BalloonJpaRepository;
+import mk.ukim.finki.veblabs.repository.impl.ManufacturerRepository;
 import mk.ukim.finki.veblabs.service.BalloonService;
 import org.springframework.stereotype.Service;
 
@@ -13,50 +13,50 @@ import java.util.Optional;
 
 @Service
 public class BalloonServiceImplementation implements BalloonService {
-    private final BalloonRepository balloonRepository;
+    private final BalloonJpaRepository balloonJpaRepository;
     private final ManufacturerRepository manufacturerRepository;
 
-    public BalloonServiceImplementation(BalloonRepository balloonRepository, ManufacturerRepository manufacturerRepository) {
-        this.balloonRepository = balloonRepository;
+    public BalloonServiceImplementation(BalloonJpaRepository balloonJpaRepository, ManufacturerRepository manufacturerRepository) {
+        this.balloonJpaRepository = balloonJpaRepository;
         this.manufacturerRepository = manufacturerRepository;
     }
 
     @Override
     public List<Balloon> listAll() {
-        return balloonRepository.findAllBalloons();
+        return balloonJpaRepository.findAll();
     }
 
     @Override
     public List<Balloon> searchByNameOrDescription(String text) {
-        return balloonRepository.findAllByNameOrDescription(text);
+        return balloonJpaRepository.findBalloonsByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(text,text);
     }
 
     @Override
     public void deleteByName(String name) {
-        balloonRepository.deleteByName(name);
+        balloonJpaRepository.deleteByName(name);
     }
 
     @Override
     public void deleteById(Long id) {
-        balloonRepository.deleteById(id);
+        balloonJpaRepository.deleteById(id);
     }
 
     @Override
     public void create(String name, String description, Long manufacturerId) {
         Manufacturer manufacturer = manufacturerRepository.findById(manufacturerId)
                 .orElseThrow(() -> new NonExistentManufacturerException(manufacturerId));
-        balloonRepository.saveBalloon(name, description, manufacturer);
+        balloonJpaRepository.save(new Balloon(name, description, manufacturer));
     }
 
     @Override
-    public Optional<Balloon> update(String name, String description, Long manufacturerId) {
+    public Balloon update(String name, String description, Long manufacturerId) {
         Manufacturer manufacturer = manufacturerRepository.findById(manufacturerId)
                 .orElseThrow(() -> new NonExistentManufacturerException(manufacturerId));
-        return balloonRepository.saveBalloon(name,description,manufacturer);
+        return balloonJpaRepository.save(new Balloon(name,description,manufacturer));
     }
 
     @Override
     public Optional<Balloon> findById(Long id) {
-        return balloonRepository.findById(id);
+        return balloonJpaRepository.findById(id);
     }
 }

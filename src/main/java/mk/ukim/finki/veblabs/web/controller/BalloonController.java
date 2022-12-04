@@ -28,18 +28,6 @@ public class BalloonController {
         model.addAttribute("balloons",balloonService.listAll());
         return "listBalloons";
     }
-    @GetMapping("/add-form")
-    public String getAddBalloonPage(Model model){
-        model.addAttribute("manufacturers", manufacturerService.findAll());
-        return "add-form";
-    }
-    @GetMapping("/edit-form/{id}")
-    public String getEditBalloonPage(@PathVariable Long id, Model model) {
-        Balloon b = this.balloonService.findById(id).orElseThrow(() -> new NonExistentBalloonException(id));
-        model.addAttribute("balloon", b);
-        model.addAttribute("manufacturers", manufacturerService.findAll());
-        return "add-form";
-    }
     @DeleteMapping("/delete/{id}")
     public String deleteBalloon(@PathVariable Long id){
         this.balloonService.deleteById(id);
@@ -52,4 +40,19 @@ public class BalloonController {
         balloonService.create(name,desc,manufacturer);
         return "redirect:/balloons";
     }
+    @GetMapping("/edit-form/{id}")
+    public String getEditBalloonPage(@PathVariable Long id, Model model) {
+        Balloon b = this.balloonService.findById(id).orElseThrow(() -> new NonExistentBalloonException(id));
+        model.addAttribute("balloon", b);
+        model.addAttribute("manufacturers", manufacturerService.findAll());
+        return "add-form";
+    }
+    @GetMapping("/add-form")
+    public String getAddBalloonPage(Model model){
+        model.addAttribute("manufacturers", manufacturerService.findAll());
+        return "add-form";
+    }
+
+
+
 }

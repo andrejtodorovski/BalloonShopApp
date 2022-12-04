@@ -11,6 +11,6 @@ public interface BalloonService {
     void deleteByName(String name);
     void deleteById(Long id);
     void create(String name, String description, Long manufacturerId);
-    Optional<Balloon> update(String name, String description, Long manufacturerId);
+    Balloon update(String name, String description, Long manufacturerId);
     Optional<Balloon> findById(Long id);
 }

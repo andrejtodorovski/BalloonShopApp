@@ -29,14 +29,6 @@
       </th>
     </tr>
     <tr>
-      <td><b>Client Name </b></td>
-      <td th:text="${order.getClientName()}"></td>
-    </tr>
-    <tr>
-      <td><b>Client Address </b></td>
-      <td th:text="${order.getClientAddress()}"></td>
-    </tr>
-    <tr>
       <td><b>Client IP Address</b></td>
       <td th:text="${ipAddress}"></td>
     </tr>
@@ -57,6 +49,7 @@
     <form th:method="POST" th:action="@{/confirmationInfo}">
       <input type="submit" value="Log out">
     </form>
+    <a th:href="@{/balloon}">Click to go back to balloon</a>
   </div>
 
 

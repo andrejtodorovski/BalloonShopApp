@@ -1,5 +1,6 @@
 package mk.ukim.finki.veblabs.web.servlet;
 
+import mk.ukim.finki.veblabs.exception.NonExistentUserException;
 import mk.ukim.finki.veblabs.model.Order;
 import mk.ukim.finki.veblabs.service.OrderService;
 import mk.ukim.finki.veblabs.service.implementation.OrderServiceImplementation;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @WebServlet(name = "balloonOrderServlet", urlPatterns = "/balloonOrder")
 public class BalloonOrderServlet extends HttpServlet {
@@ -36,12 +39,16 @@ public class BalloonOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String color = (String) req.getSession().getAttribute("color");
         String size = (String) req.getSession().getAttribute("size");
-        String clientAddress = req.getParameter("clientAddress");
-        String clientName = req.getParameter("clientName");
-        Order order = orderService.placeOrder(color,clientName,clientAddress);
-        order.setBalloonSize(size);
+        String username = (String) req.getSession().getAttribute("username");
+        LocalDateTime localDateTime = LocalDateTime.parse(req.getParameter("dateForOrder"));
+        System.out.println(localDateTime);
+        Order order;
+        try {
+            order = orderService.placeOrder(color,size,username, localDateTime);
+        } catch (NonExistentUserException e) {
+            throw new RuntimeException(e);
+        }
         req.getSession().setAttribute("order",order);
-        orderService.addOrder(order);
         resp.sendRedirect("/confirmationInfo");
     }
 }

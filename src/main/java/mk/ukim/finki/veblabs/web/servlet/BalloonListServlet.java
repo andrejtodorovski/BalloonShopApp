@@ -2,6 +2,7 @@ package mk.ukim.finki.veblabs.web.servlet;
 
 import mk.ukim.finki.veblabs.model.Balloon;
 import mk.ukim.finki.veblabs.model.Order;
+import mk.ukim.finki.veblabs.model.ShoppingCart;
 import mk.ukim.finki.veblabs.service.BalloonService;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
