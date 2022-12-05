@@ -42,4 +42,10 @@ public class OrderServiceImplementation implements OrderService {
         User user = userJpaRepository.findByUsername(name).orElseThrow(NonExistentUserException::new);
         return orderJpaRepository.findAllByUser(user);
     }
+
+    @Override
+    public List<Order> findByDateCreatedBetween(LocalDateTime time1, LocalDateTime time2, User user) {
+        return orderJpaRepository.findAllByDateCreatedIsBetweenAndUser(time1,time2,user);
+    }
+
 }

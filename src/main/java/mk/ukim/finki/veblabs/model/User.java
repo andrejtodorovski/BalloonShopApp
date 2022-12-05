@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,15 +23,17 @@ public class User {
     private String password;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<ShoppingCart> carts;
 
-    public User(String username, String name, String surname, String password) {
+    public User(String username, String name, String surname, String password,LocalDate dateOfBirth) {
         this.fullName = new UserFullname();
         this.username = username;
         this.fullName.setName(name);
         this.fullName.setSurname(surname);
         this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.carts = new ArrayList<>();
     }
 
     public User() {

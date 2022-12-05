@@ -10,6 +10,7 @@ public interface BalloonService {
     List<Balloon> searchByNameOrDescription(String text);
     void deleteByName(String name);
     void deleteById(Long id);
+    void deleteByDescription(String description);
     void create(String name, String description, Long manufacturerId);
     Balloon update(String name, String description, Long manufacturerId);
     Optional<Balloon> findById(Long id);

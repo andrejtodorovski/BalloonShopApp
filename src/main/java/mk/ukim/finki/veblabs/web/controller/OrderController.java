@@ -2,8 +2,10 @@ package mk.ukim.finki.veblabs.web.controller;
 
 import mk.ukim.finki.veblabs.exception.NonExistentUserException;
 import mk.ukim.finki.veblabs.model.Order;
+import mk.ukim.finki.veblabs.model.User;
 import mk.ukim.finki.veblabs.service.OrderService;
 import mk.ukim.finki.veblabs.service.ShoppingCartService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -39,5 +42,19 @@ public class OrderController {
         model.addAttribute("orders",orders);
 //       model.addAttribute("color",request.getSession().getAttribute("color"));
         return "listOrders";
+    }
+    @GetMapping("/filtered")
+    public String viewFilteredOrders(Model model, @RequestParam @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateFrom,
+                                     @RequestParam @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTo, HttpServletRequest request)
+    {
+
+/*        String dateFrom = request.getParameter("dateFrom");
+        String dateTo =  request.getParameter("dateTo");
+        LocalDateTime from=LocalDateTime.parse(dateFrom);
+        LocalDateTime to=LocalDateTime.parse(dateTo);*/
+        User user = (User) request.getSession().getAttribute("user");
+        List<Order> orders=orderService.findByDateCreatedBetween(dateFrom,dateTo,user);
+        model.addAttribute("orders",orders);
+        return "filteredOrders";
     }
 }

@@ -16,7 +16,7 @@ public class ShoppingCart {
     private Long id;
     @ManyToOne
     private User user;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd 'T' HH:mm:ss")
     private LocalDateTime dateCreated;
     @ManyToMany
     private List<Order> orders;

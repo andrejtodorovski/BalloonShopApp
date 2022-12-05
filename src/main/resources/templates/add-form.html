@@ -24,8 +24,8 @@
            placeholder="Enter balloon description:">
   </div>
   <div>
-    <label for="manifacturer">Manifacturer</label>
-    <select name="manufacturer" id="manifacturer">
+    <label for="manufacturer">Manufacturer</label>
+    <select name="manufacturer" id="manufacturer">
       <option th:if="${balloon} != null"
               th:selected="${balloon.getManufacturer() != null && balloon.getManufacturer().getId()==man.getId()}"
               th:each="man : ${manufacturers}"

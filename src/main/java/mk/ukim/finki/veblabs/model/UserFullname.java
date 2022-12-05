@@ -1,7 +1,9 @@
 package mk.ukim.finki.veblabs.model;
 
-import java.io.Serializable;
+import lombok.Data;
 
+import java.io.Serializable;
+@Data
 public class UserFullname implements Serializable {
     private String name;
     private String surname;

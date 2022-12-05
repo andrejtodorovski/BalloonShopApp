@@ -20,16 +20,29 @@
     <tr>
       <th>Color</th>
       <th>Size</th>
+      <th>Time</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="o : ${orders}">
       <td th:text="${o.getBalloonColor()}"></td>
       <td th:text="${o.getBalloonSize()}"></td>
+      <td th:text="${o.getDateCreated()}"></td>
     </tr>
     </tbody>
   </table>
   <h1 th:text="${color}"></h1>
+  <form th:action="@{'/orders/filtered'}" th:method="GET">
+    From
+    <label>
+      <input type="datetime-local" name="dateFrom"/>
+    </label><br>
+    To
+    <label>
+      <input type="datetime-local" name="dateTo"/>
+    </label>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </main>
 </body>
 </html>

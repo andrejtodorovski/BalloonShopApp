@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet(name = "balloonOrderServlet", urlPatterns = "/balloonOrder")
 public class BalloonOrderServlet extends HttpServlet {
@@ -41,7 +42,7 @@ public class BalloonOrderServlet extends HttpServlet {
         String size = (String) req.getSession().getAttribute("size");
         String username = (String) req.getSession().getAttribute("username");
         LocalDateTime localDateTime = LocalDateTime.parse(req.getParameter("dateForOrder"));
-        System.out.println(localDateTime);
+        localDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         Order order;
         try {
             order = orderService.placeOrder(color,size,username, localDateTime);

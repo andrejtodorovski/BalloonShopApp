@@ -11,4 +11,5 @@ public interface OrderService {
     Order placeOrder(String color, String size, String username, LocalDateTime ldt) throws NonExistentUserException;
     List<Order> findAll();
     List<Order> searchByClient(String name) throws NonExistentUserException;
+    List<Order> findByDateCreatedBetween(LocalDateTime time1, LocalDateTime time2, User user);
 }

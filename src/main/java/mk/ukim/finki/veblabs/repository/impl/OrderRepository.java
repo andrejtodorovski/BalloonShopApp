@@ -12,10 +12,8 @@ import java.util.stream.Collectors;
 @Repository
 public class OrderRepository {
     List<Order> orderList;
-    private final OrderJpaRepository orderJpaRepository;
 
-    public OrderRepository(OrderJpaRepository orderJpaRepository) {
-        this.orderJpaRepository = orderJpaRepository;
+    public OrderRepository() {
         orderList = new ArrayList<>();
     }
     public List<Order> findAll(){
@@ -28,7 +26,5 @@ public class OrderRepository {
     public void addOrder(Order order) {
         orderList.add(order);
     }
-    List<Order> findAllByTime(LocalDateTime from, LocalDateTime to){
-        return orderJpaRepository.findAll().stream().filter(order -> LocalDateTime.parse(order.getDateCreated()).isBefore(to) && LocalDateTime.parse(order.getDateCreated()).isAfter(from)).collect(Collectors.toList());
-    }
+
 }

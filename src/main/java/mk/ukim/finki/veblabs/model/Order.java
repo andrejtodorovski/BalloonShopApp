@@ -1,6 +1,5 @@
 package mk.ukim.finki.veblabs.model;
 
-import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,7 +10,8 @@ import java.time.LocalDateTime;
 public class Order {
     String balloonColor;
     String balloonSize;
-    String dateCreated;
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    LocalDateTime dateCreated;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -22,7 +22,7 @@ public class Order {
         this.balloonColor = balloonColor;
         this.balloonSize = balloonSize;
         this.user = user;
-        this.dateCreated = String.valueOf(ldt);
+        this.dateCreated = ldt;
     }
 
     public Order(String balloonColor) {
@@ -65,11 +65,11 @@ public class Order {
         this.user = user;
     }
 
-    public String getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(String dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 }

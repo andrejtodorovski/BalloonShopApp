@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface BalloonJpaRepository extends JpaRepository<Balloon,Long> {
     void deleteByName(String name);
-    List<Balloon> findBalloonsByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String description);
+    void deleteByDescription(String description);
+    List<Balloon> findAllByNameOrDescription(String name, String description);
 }

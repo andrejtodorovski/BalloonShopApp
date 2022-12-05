@@ -43,8 +43,10 @@ public class BalloonController {
     @GetMapping("/edit-form/{id}")
     public String getEditBalloonPage(@PathVariable Long id, Model model) {
         Balloon b = this.balloonService.findById(id).orElseThrow(() -> new NonExistentBalloonException(id));
+        deleteBalloon(id);
         model.addAttribute("balloon", b);
         model.addAttribute("manufacturers", manufacturerService.findAll());
+
         return "add-form";
     }
     @GetMapping("/add-form")
@@ -52,7 +54,10 @@ public class BalloonController {
         model.addAttribute("manufacturers", manufacturerService.findAll());
         return "add-form";
     }
-
-
-
+    @PostMapping("/input")
+    public String deleteByInput(@RequestParam String text)
+    {
+        balloonService.deleteByDescription(text);
+        return "redirect:/balloons";
+    }
 }
