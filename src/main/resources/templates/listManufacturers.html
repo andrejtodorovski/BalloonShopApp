@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:td="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manufacturers</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="m : ${manufacturers}">
+        <td th:text="${m.getName()}"></td>
+        <td th:text="${m.getCountry()}"></td>
+        <td th:text="${m.getAddress()}"></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/balloon}">Click to go back to balloon</a>
+<a th:href="@{/manufacturers/add}">Click to add a manufacturer</a>
+
+</body>
+</html>

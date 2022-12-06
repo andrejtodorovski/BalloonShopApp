@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:td="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Manufacturer</title>
+</head>
+<body>
+<form th:action="${'/manufacturers/add'}" th:method="post">
+  <div>
+    <label for="name">Manufacturer name</label>
+    <input type="text"
+           id="name"
+           name="name"
+           required
+           placeholder="Enter manufacturer name:">
+  </div>
+  <div>
+    <label for="country">Manufacturer country</label>
+    <input type="text"
+           id="country"
+           name="country"
+           required
+           placeholder="Enter manufacturer country:">
+  </div>
+  <div>
+    <label for="address">Manufacturer address</label>
+    <input type="text"
+           id="address"
+           name="address"
+           required
+           placeholder="Enter manufacturer address:">
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+</body>
+</html>

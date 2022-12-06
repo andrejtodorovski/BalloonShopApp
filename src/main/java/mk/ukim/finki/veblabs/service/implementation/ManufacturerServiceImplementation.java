@@ -26,4 +26,9 @@ public class ManufacturerServiceImplementation implements ManufacturerService {
     public Optional<Manufacturer> findById(Long id) {
         return manufacturerJpaRepository.findById(id);
     }
+
+    @Override
+    public Manufacturer save(String name, String country, String address) {
+        return manufacturerJpaRepository.save(new Manufacturer(name,country,address));
+    }
 }
