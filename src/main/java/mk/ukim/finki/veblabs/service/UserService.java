@@ -5,4 +5,5 @@ import mk.ukim.finki.veblabs.model.User;
 
 public interface UserService {
     User login(String username, String password) throws NonExistentUserException;
+    User findByUsername(String username) throws NonExistentUserException;
 }

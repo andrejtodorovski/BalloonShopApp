@@ -33,14 +33,17 @@ public class BalloonOrderServlet extends HttpServlet {
         String size = (String) req.getSession().getAttribute("size");
         context.setVariable("color",color);
         context.setVariable("size",size);
+        resp.setContentType("application/xhtml+xml");
         springTemplateEngine.process("deliveryInfo.html", context, resp.getWriter());
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String color = (String) req.getSession().getAttribute("color");
         String size = (String) req.getSession().getAttribute("size");
-        String username = (String) req.getSession().getAttribute("username");
+        // String username = (String) req.getSession().getAttribute("username");
+        String username = (String) req.getRemoteUser();
         LocalDateTime localDateTime = LocalDateTime.parse(req.getParameter("dateForOrder"));
         localDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
         Order order;

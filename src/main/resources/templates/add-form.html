@@ -1,6 +1,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
   <title>Add/Edit Balloon</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
            name="name"
            th:value="(${balloon} != null ? ${balloon.getName()} : '')"
            required
-           placeholder="Enter balloon name:">
+           placeholder="Enter balloon name:"/>
   </div>
   <div>
     <label for="desc">Balloon description</label>
@@ -21,7 +21,7 @@
            name="desc"
            th:value="(${balloon} != null ? ${balloon.getDescription()} : '')"
            required
-           placeholder="Enter balloon description:">
+           placeholder="Enter balloon description:"/>
   </div>
   <div>
     <label for="manufacturer">Manufacturer</label>

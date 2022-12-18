@@ -25,25 +25,25 @@ public class LoginController {
     public String showLoginPage(){
         return "login";
     }
-    @PostMapping
-    public String loginUser(@RequestParam String username,
-                           @RequestParam String password,
-                           Model model , HttpServletRequest request){
-        User u;
-        try{
-            u=userService.login(username,password);
-            request.getSession().setAttribute("username",username);
-            request.getSession().setAttribute("user",u);
-            ShoppingCart shoppingCart = new ShoppingCart(u);
-            request.getSession().setAttribute("cartId",shoppingCart.getId());
-            return "redirect:/balloons";
-        }
-        catch(NonExistentUserException exception){
-            model.addAttribute("hasError", true);
-            model.addAttribute("error", exception.getMessage());
-            return "login";
-
-        }
-    }
+//    @PostMapping
+//    public String loginUser(@RequestParam String username,
+//                           @RequestParam String password,
+//                           Model model , HttpServletRequest request){
+//        User u;
+//        try{
+//            u=userService.login(username,password);
+//            request.getSession().setAttribute("username",username);
+//            request.getSession().setAttribute("user",u);
+//            ShoppingCart shoppingCart = new ShoppingCart(u);
+//            request.getSession().setAttribute("cartId",shoppingCart.getId());
+//            return "redirect:/balloons";
+//        }
+//        catch(NonExistentUserException exception){
+//            model.addAttribute("hasError", true);
+//            model.addAttribute("error", exception.getMessage());
+//            return "login";
+//
+//        }
+//    }
 
 }

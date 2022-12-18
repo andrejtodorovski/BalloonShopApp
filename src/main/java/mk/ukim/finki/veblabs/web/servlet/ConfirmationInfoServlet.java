@@ -29,7 +29,9 @@ public class ConfirmationInfoServlet extends HttpServlet {
         String clientAgent = req.getHeader("User-Agent");
         context.setVariable("ipAddress", ipAddress);
         context.setVariable("clientBrowser", clientAgent);
+        resp.setContentType("application/xhtml+xml");
         springTemplateEngine.process("confirmationInfo.html", context, resp.getWriter());
+
     }
 
     @Override

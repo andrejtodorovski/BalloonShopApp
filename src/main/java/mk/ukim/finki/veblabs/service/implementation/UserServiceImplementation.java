@@ -18,4 +18,9 @@ public class UserServiceImplementation implements UserService {
     public User login(String username, String password) throws NonExistentUserException {
         return userJpaRepository.findByUsernameAndPassword(username,password).orElseThrow(NonExistentUserException::new);
     }
+
+    @Override
+    public User findByUsername(String username) throws NonExistentUserException {
+        return userJpaRepository.findByUsername(username).orElseThrow(NonExistentUserException::new);
+    }
 }

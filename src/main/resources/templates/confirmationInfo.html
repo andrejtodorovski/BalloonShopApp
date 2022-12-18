@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:td="http://www.thymeleaf.org"
       lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8"/>
   <title>WP lab - Confirmation Info</title>
   <style type="text/css">
     body {
@@ -42,12 +42,12 @@
     </tr>
     <tr>
       <td><b>Balloon Size </b></td>
-      <td th:text="${order.getBalloonSize()}">/td>
+      <td th:text="${order.getBalloonSize()}"></td>
     </tr>
   </table>
   <div>
     <form th:method="POST" th:action="@{/confirmationInfo}">
-      <input type="submit" value="Log out">
+      <input type="submit" value="Log out"/>
     </form>
     <a th:href="@{/balloon}">Click to go back to balloon</a>
   </div>

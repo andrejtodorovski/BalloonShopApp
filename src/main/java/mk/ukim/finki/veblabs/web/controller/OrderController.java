@@ -5,6 +5,7 @@ import mk.ukim.finki.veblabs.model.Order;
 import mk.ukim.finki.veblabs.model.User;
 import mk.ukim.finki.veblabs.service.OrderService;
 import mk.ukim.finki.veblabs.service.ShoppingCartService;
+import mk.ukim.finki.veblabs.service.UserService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +22,11 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
     private final ShoppingCartService shoppingCartService;
-    public OrderController(OrderService orderService, ShoppingCartService shoppingCartService) {
+    private final UserService userService;
+    public OrderController(OrderService orderService, ShoppingCartService shoppingCartService, UserService userService) {
         this.orderService = orderService;
         this.shoppingCartService = shoppingCartService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -32,7 +35,8 @@ public class OrderController {
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);
         }
-        String username = (String) request.getSession().getAttribute("username");
+        // String username = (String) request.getSession().getAttribute("username");
+        String username = request.getRemoteUser();
         List<Order> orders;
         try {
             orders = orderService.searchByClient(username);
@@ -52,7 +56,12 @@ public class OrderController {
         String dateTo =  request.getParameter("dateTo");
         LocalDateTime from=LocalDateTime.parse(dateFrom);
         LocalDateTime to=LocalDateTime.parse(dateTo);*/
-        User user = (User) request.getSession().getAttribute("user");
+        User user = null;
+        try {
+            user = userService.findByUsername(request.getRemoteUser());
+        } catch (NonExistentUserException e) {
+            throw new RuntimeException(e);
+        }
         List<Order> orders=orderService.findByDateCreatedBetween(dateFrom,dateTo,user);
         model.addAttribute("orders",orders);
         return "filteredOrders";

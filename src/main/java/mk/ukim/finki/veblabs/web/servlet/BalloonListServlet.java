@@ -30,7 +30,9 @@ public class BalloonListServlet extends HttpServlet {
         List<Balloon> balloonList = balloonService.listAll();
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("balloons", balloonList);
+        resp.setContentType("application/xhtml+xml");
         this.springTemplateEngine.process("listBalloons.html",context,resp.getWriter());
+
     }
 
     @Override
