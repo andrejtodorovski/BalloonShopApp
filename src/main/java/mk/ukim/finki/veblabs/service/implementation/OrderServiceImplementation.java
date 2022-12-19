@@ -16,11 +16,9 @@ import java.util.List;
 public class OrderServiceImplementation implements OrderService {
     private final OrderJpaRepository orderJpaRepository;
     private final UserJpaRepository userJpaRepository;
-    private final ShoppingCartJpaRepository shoppingCartJpaRepository;
-    public OrderServiceImplementation(OrderJpaRepository orderJpaRepository, UserJpaRepository userJpaRepository, ShoppingCartJpaRepository shoppingCartJpaRepository) {
+    public OrderServiceImplementation(OrderJpaRepository orderJpaRepository, UserJpaRepository userJpaRepository) {
         this.orderJpaRepository = orderJpaRepository;
         this.userJpaRepository = userJpaRepository;
-        this.shoppingCartJpaRepository = shoppingCartJpaRepository;
     }
 
 

@@ -12,18 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/")
 public class LoginController {
     private final UserService userService;
 
     public LoginController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping
+    @GetMapping("/login")
     public String showLoginPage(){
         return "login";
+    }
+    @GetMapping("/register")
+    public String getRegisterPage(){
+        return "register";
+    }
+    @PostMapping("/register")
+    public void register(@RequestParam String username, @RequestParam String password,
+                         @RequestParam String name, @RequestParam String surname){
+        userService.save(username,name, surname, password, LocalDate.now());
     }
 //    @PostMapping
 //    public String loginUser(@RequestParam String username,

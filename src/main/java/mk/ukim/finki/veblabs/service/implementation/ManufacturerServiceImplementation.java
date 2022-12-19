@@ -29,6 +29,8 @@ public class ManufacturerServiceImplementation implements ManufacturerService {
 
     @Override
     public Manufacturer save(String name, String country, String address) {
-        return manufacturerJpaRepository.save(new Manufacturer(name,country,address));
+        Manufacturer m = new Manufacturer(name,country,address);
+        manufacturerJpaRepository.save(m);
+        return m;
     }
 }

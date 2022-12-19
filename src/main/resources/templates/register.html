@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login form</title>
-<!--    <link href="/main.css" rel="stylesheet"/>-->
+    <!--    <link href="/main.css" rel="stylesheet"/>-->
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -9,10 +9,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-<form th:method="POST" th:action="@{/login}">
+<form th:method="POST" th:action="@{/register}">
     <div class="container">
-        <form class="form-signin mt-xl-5" method="post" action="/login">
-            <h2 class="form-signin-heading">Sign in</h2>
+        <form class="form-signin mt-xl-5" method="post" action="/register">
+            <h2 class="form-signin-heading">Register</h2>
             <p>
                 <label for="username" class="sr-only">Username</label>
                 <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus=""/>
@@ -21,14 +21,22 @@
                 <label for="password" class="sr-only">Password</label>
                 <input type="password" id="password" name="password" class="form-control" placeholder="Password" required=""/>
             </p>
+            <p>
+                <label for="name" class="sr-only">Username</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Name" required="" autofocus=""/>
+            </p>
+            <p>
+                <label for="surname" class="sr-only">Username</label>
+                <input type="text" id="surname" name="surname" class="form-control" placeholder="Surname" required="" autofocus=""/>
+            </p>
         </form>
         <div th:if="${hasError}">
             <div th:text="${error}" class="text-danger"></div>
         </div>
 
-        <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
     </div>
 </form>
-<a href="/register" class="btn btn-block btn-light">Register here</a>
+<a href="/login" class="btn btn-block btn-light">Sign in</a>
 </body>
 </html>

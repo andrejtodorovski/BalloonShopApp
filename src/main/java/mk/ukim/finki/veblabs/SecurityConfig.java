@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity security) throws Exception
     {
         security.csrf().disable().authorizeRequests()
-                .antMatchers("/", "/balloons", "/login", "/balloon", "/balloonOrder", "/confirmationInfo", "/manufacturers","/selectBalloon").permitAll()
+                .antMatchers("/","/register" ,"/balloons", "/login", "/balloon", "/balloonOrder", "/confirmationInfo", "/manufacturers","/selectBalloon").permitAll()
                 .antMatchers("/orders","/balloons/add-form", "/balloons/edit-form/**").authenticated()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
